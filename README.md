@@ -1,101 +1,167 @@
-# Spam Email Classification System
+# 📧 Spam Email Classification System
 
-A production-grade machine learning system designed to robustly classify emails as "Spam" or "Ham" (legitimate). This project features a modular pipeline architecture for training and inference, integrated with a modern Streamlit user interface for easy interaction.
+A machine learning-based application that classifies emails as **Spam** or **Ham (Legitimate)** using multiple classification algorithms. Built with Python and Streamlit, the system provides an interactive interface for single-email classification and batch processing of MBOX email archives.
 
-## 🚀 Key Features
+## 🚀 Live Demo
 
-- **Advanced ML Pipeline**: Modular design separating data ingestion, transformation, and model training.
-- **Multiple Model Support**: evaluation of various algorithms including SVM, Logistic Regression, Decision Trees, and Random Forest.
-- **Interactive Web UI**: Built with Streamlit for real-time single-email analysis and batch processing.
-- **MBOX Support**: Native capability to process and classify entire `mbox` email archives.
-- **Detailed Analytics**: Comprehensive logging and performance metrics (Precision, Recall, F1-Score).
+**[Launch Spam Email Classifier](https://spam-email-detection-dznahsh4mb4owbnqrf8evq.streamlit.app/)**
+
+## ✨ Key Features
+
+- **Email Classification:** Predict whether an email is Spam or Ham using machine learning.
+- **Multiple ML Algorithms:** Supports SVM, Logistic Regression, Decision Trees, and Random Forest.
+- **Interactive Web Interface:** User-friendly Streamlit application for real-time email analysis.
+- **Single Email Detection:** Classify individual emails by entering their content.
+- **Batch MBOX Processing:** Upload and classify multiple emails from `.mbox` archives.
+- **Performance Evaluation:** Evaluate models using Accuracy, Precision, Recall, and F1-Score.
+- **Modular Architecture:** Separate components for data ingestion, transformation, training, and prediction.
 
 ## 🛠️ Tech Stack
 
-- **Language**: Python 3.10+
-- **Frontend**: Streamlit
-- **ML Framework**: Scikit-learn
-- **Data Processing**: Pandas, NumPy, BeautifulSoup4
-- **Project Management**: `uv` (recommended) or `pip`
+| Category | Technologies |
+|---|---|
+| Programming Language | Python 3.10+ |
+| Frontend | Streamlit |
+| Machine Learning | Scikit-learn |
+| Data Processing | Pandas, NumPy |
+| Text Processing | BeautifulSoup4 |
+| Package Management | pip, uv |
 
 ## 📂 Project Structure
 
-```
-├── app.py                  # Main Streamlit Web Application
-├── requirements.txt        # Project dependencies
-├── main.py                 # (Optional) Alternative entry point
+```text
+Spam-Email-Detection/
+│
+├── app.py
+├── main.py
+├── requirements.txt
+│
 ├── src/
-│   ├── components/         # Core processing modules (Ingestion, Transformation)
-│   ├── pipeline/           # Orchestration pipelines (Training, Prediction)
-│   ├── config/             # Configuration and parameters
-│   └── utils/              # Helper functions, logging, and state management
-├── data/                   # Dataset storage (inputs)
-├── outputs/                # Training artifacts (models, vectorizers)
-└── logs/                   # System runtime logs
+│   ├── components/
+│   ├── pipeline/
+│   ├── config/
+│   └── utils/
+│
+├── data/
+├── outputs/
+├── logs/
+│
+└── README.md
 ```
 
-## ⚡ Installation
+## ⚙️ Installation and Setup
 
-1. **Clone the Repository**
-   ```bash
-   git clone <repository_url>
-   cd Spam-Email-Detection
-   ```
+### 1. Clone the Repository
 
-2. **Set up Environment**
-   It is recommended to use a virtual environment.
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
+```bash
+git clone https://github.com/yokai-og/Spam-Email-Detection.git
 
-3. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+cd Spam-Email-Detection
+```
 
-## 🖥️ Usage
+### 2. Create a Virtual Environment
 
-### 1. Running the Web Application
-Launch the interactive dashboard to classify emails instantly.
+```bash
+python -m venv .venv
+```
+
+Activate the environment:
+
+**Windows:**
+```powershell
+.venv\Scripts\activate
+```
+
+**Linux / macOS:**
+```bash
+source .venv/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the Application
 
 ```bash
 streamlit run app.py
 ```
 
-- **Single Email Tab**: Paste email content to get an immediate Spam/Ham prediction with a confidence score.
-- **Batch Processing Tab**: Upload an `.mbox` file to process multiple emails at once and download the results as a CSV.
+Open the local URL provided in your terminal to access the application.
 
-### 2. Training the Model
-(Optional) If you wish to retrain the models on new data:
+## 🖥️ Application Usage
 
-1. Place your dataset in `data/dataset/dataset.csv`.
-2. Run the training pipeline:
-   ```bash
-   python -m src.pipeline.training_pipeline
-   ```
-3. Artifacts (Model & Vectorizer) will be saved in the `outputs/` directory.
-4. **Important**: Update `src/config/config.py` with the new paths to your generated model and vectorizer if they change.
+### Single Email Classification
 
-## ⚙️ Configuration
+1. Navigate to the Single Email tab.
+2. Enter or paste the email content.
+3. Click the classification button.
+4. View the predicted result: Spam or Ham.
 
-The system is highly configurable via `src/config/config.py`. You can adjust:
-- Model hyperparameters (Grid Search configuration)
-- Input/Output paths
-- Training parameters (Cross-validation folds, etc.)
+### Batch MBOX Processing
 
-## 📊 Model Performance
+1. Navigate to the Batch MBOX Processing tab.
+2. Upload an `.mbox` email archive.
+3. Process multiple emails.
+4. Review the classification results and download the output as a CSV file.
 
-The pipeline automatically evaluates models using 5-fold cross-validation. Metrics including Accuracy, Precision, Recall, and F1-Score are logged for each experiment. By default, the system selects the best performing model (often SVM or Random Forest) for inference.
+## 🧠 Machine Learning Models
+
+The project explores multiple classification algorithms:
+
+- Support Vector Machine (SVM)
+- Logistic Regression
+- Decision Tree Classifier
+- Random Forest Classifier
+
+Model performance is evaluated using:
+
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+
+The training pipeline uses cross-validation to evaluate model performance and identify a suitable model for prediction.
+
+## 🔄 Model Training
+
+To retrain the models:
+
+1. Place the dataset at `data/dataset/dataset.csv`.
+2. Execute the training pipeline:
+
+```bash
+python -m src.pipeline.training_pipeline
+```
+
+3. The generated model and vectorizer artifacts are saved in the `outputs/` directory.
+
+Update the configuration paths if the generated artifact locations change.
+
+## 🌐 Deployment
+
+The application is deployed using **Streamlit Community Cloud**.
+
+**Live Application:**  
+https://spam-email-detection-dznahsh4mb4owbnqrf8evq.streamlit.app/
+
+## 📌 Repository
+
+**GitHub:**  
+https://github.com/yokai-og/Spam-Email-Detection
 
 ## 🤝 Contributing
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Contributions are welcome!
 
-## 📝 License
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Push the branch to GitHub.
+5. Open a Pull Request.
 
-Distributed under the MIT License. See `LICENSE` for more information.
+## 👨‍💻 Author
+
+**GitHub:** [yokai-og](https://github.com/yokai-og)
